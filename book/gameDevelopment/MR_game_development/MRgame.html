@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>物理可视化与调试 - Game Physics Notes</title>
+        <title>MR游戏开发 - Game Physics Notes</title>
 
 
         <!-- Custom HTML head -->
@@ -12,20 +12,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon-de23e50b.svg">
-        <link rel="shortcut icon" href="favicon-8114d1fc.png">
-        <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-2459343d.css">
-        <link rel="stylesheet" href="css/chrome-ae938929.css">
-        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
-        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
-        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -34,13 +34,13 @@
 
         <!-- Provide site root and default themes to javascript -->
         <script>
-            const path_to_root = "";
+            const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-e760128d.js";
+            window.path_to_searchindex_js = "../../searchindex-e760128d.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-2960637e.js"></script>
+        <script src="../../toc-2960637e.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -107,7 +107,7 @@
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
             </noscript>
             <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -142,7 +142,7 @@
                     <h1 class="menu-title">Game Physics Notes</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
                             <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
 
@@ -176,16 +176,58 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        
+                        <h1 id="混合现实mr游戏开发入门"><a class="header" href="#混合现实mr游戏开发入门">混合现实（MR）游戏开发入门</a></h1>
+<p>近年来，虚拟现实（VR）、增强现实（AR）和混合现实（MR）技术的迅速崛起，推动了游戏开发进入全新的维度。作为一名VR/MR游戏开发者，我亲眼见证了技术的不断进步与升级。从微软第一代HoloLens头显到HTC Vive，再到Quest、Quest 2，直到如今为Meta Quest 3开发游戏，我深刻感受到了这些技术如何颠覆传统2D和3D视觉表现，并重新定义了游戏的交互方式和沉浸感体验。</p>
+<p>许多朋友常常问我：“VR、AR和MR有何区别？”、“购买哪个头显最合适？”、“有哪些好玩的VR、MR游戏？”为了解答这些问题，我决定写这篇文章，探讨这三种技术的核心特点及其在游戏中的应用，介绍主流游戏设备，并为开发者梳理Meta Quest 3的Unity开发路线。</p>
+<h2 id="vr游戏沉浸式虚拟体验"><a class="header" href="#vr游戏沉浸式虚拟体验">VR游戏：沉浸式虚拟体验</a></h2>
+<p>VR（虚拟现实）游戏让玩家通过头戴显示设备（HMD）完全沉浸在虚拟环境中。通过视觉、听觉以及手柄的振动反馈，VR游戏为玩家提供了高度的沉浸感。</p>
+<p>推荐一款科幻风的VR游戏——《红色物质2》（Red Matter 2）。这款屡获殊荣的沉浸式解谜冒险游戏，让玩家扮演特工Sasha，在月球基地揭开神秘的“红物质”背后的秘密。游戏使用优化后的Unreal Engine进行渲染，营造了一个科幻的环境，带来极具沉浸感的游戏体验。</p>
+<p><img src="./images/redMatter.jpg" alt="RedMatter"></p>
+<h2 id="ar游戏现实与虚拟的融合"><a class="header" href="#ar游戏现实与虚拟的融合">AR游戏：现实与虚拟的融合</a></h2>
+<p>与VR游戏不同，AR游戏通过智能手机、AR眼镜或平板电脑等设备，通过设备上的摄像头捕捉现实世界图像，并将虚拟物体叠加到这些现实图像中，从而为玩家呈现现实与虚拟融合的场景。</p>
+<p>推荐一款AR手机游戏——《宇宙战线 AR》。在这款游戏中，玩家将化身为宇宙舰队指挥官，指挥自己的舰队在浩瀚的宇宙中与敌人展开激烈战斗。游戏利用AR技术将虚拟战舰与现实环境结合，你在家中的客厅可以指挥舰队与敌舰、激光炮火展开战斗。</p>
+<h2 id="mr游戏虚拟与现实的深度交互"><a class="header" href="#mr游戏虚拟与现实的深度交互">MR游戏：虚拟与现实的深度交互</a></h2>
+<p>MR（混合现实）游戏将VR和AR的特点结合，提供更为自然的交互体验。玩家佩戴MR头显后，不仅能看到虚拟元素，还能与真实世界进行深度互动。MR设备通过理解周围环境，实现虚拟元素与现实物体的实时交互。</p>
+<p>推荐最新发行的MR游戏—《空间特工队》（Spatial Ops）。这款游戏被誉为MR模式下的FPS游戏，提供单人战役模式与竞技场模式。在单人模式中，玩家扮演一名特工，在激烈的射击战斗中保护现实世界；而竞技场模式则让玩家将家中的空间瞬间转变为战场，体验科幻版的CS。</p>
+<p><img src="./images/spatialOps.jpg" alt="SpatialOps"></p>
+<h2 id="设备推荐主流硬件分析"><a class="header" href="#设备推荐主流硬件分析">设备推荐：主流硬件分析</a></h2>
+<p>在VR、AR和MR技术中，目前VR和MR游戏应用最为广泛。以下是一些主要硬件设备的介绍：</p>
+<p><strong>Meta Quest系列</strong>：由Facebook推出，是全球销量领先的头显设备。以Quest 3为例，这款设备搭载了骁龙XR2 Gen 2处理器，单眼分辨率高达2064×2208，刷新率可达到90Hz，售价大约在3000-4000元之间，是同价位中性能表现最优的选择。游戏需要通过Meta商店购买，由于网络原因，在国内使用时需要借助加速器。适合对硬件配置和系统设置有一定了解的用户。</p>
+<p><strong>Pico系列</strong>：作为国内VR/MR市场的领先品牌，Pico系列在2024年推出了与Quest 3竞争的Pico 4 Ultra。这款设备同样搭载骁龙XR2 Gen 2处理器，功能与Quest 3类似，尽管平台上的游戏数量不及Meta多，但在国内使用时无需加速器，适合更广泛的用户群体。</p>
+<p><strong>Vision Pro</strong>：苹果公司于2024年推出的Vision Pro是高端MR设备的代表，配备M2芯片，单眼分辨率高达3660×3200，是市场上计算能力最强的头显之一。Vision Pro支持沉浸度调节，并可在MR和VR模式之间自由切换。然而，由于该设备未配备手柄，游戏交互主要依赖手势控制。因此，目前适配的游戏多为棋牌类和休闲类游戏。设备售价接近3万元，适合追求极致显示效果的用户。</p>
+<h2 id="开发路线从头开始"><a class="header" href="#开发路线从头开始">开发路线：从头开始</a></h2>
+<p>对于开发者，以下是从Meta Quest 3+Unity的开发路线，帮助你一步步准备好开发环境。</p>
+<ol>
+<li>
+<p>确定游戏体验方式：首先要确定游戏的体验方式，是完全沉浸式的VR体验，还是混合现实的MR体验。现在很多游戏提供两种模式，供玩家自由切换。</p>
+</li>
+<li>
+<p>选择游戏引擎：目前，Meta Quest平台上的游戏大多数使用Unity开发，约70%-80%是Unity开发的，剩余的20%-30%使用Unreal Engine（UE）或其他引擎。可以根据个人技术背景和需求选择适合的引擎。</p>
+</li>
+<li>
+<p>准备硬件设备和开发者账号：尽管Meta提供了Meta XR Simulator头显模拟器等工具，许多复杂的场景和性能测试仍需真实设备进行验证。建议购买Quest 3并使用Windows系统的PC进行开发。所有Meta Horizon Store上的应用发布者都需要在Meta开发者中心创建开发者账号。</p>
+</li>
+<li>
+<p>安装Meta开发工具：Meta Quest Developer Hub：Meta提供的开发应用，可进行头显设备设置、性能分析、安装游戏软件以及访问学习资源。Meta Quest Link：通过USB-C或WiFi连接头显到Windows电脑，使用Link模式可以在Quest中直接查看Unity或Unreal游戏运行效果，无需重新编译，提高研发效率。</p>
+</li>
+</ol>
+<h2 id="配置unity"><a class="header" href="#配置unity">配置Unity</a></h2>
+<p>Unity的配置主要包括以下几个方面：安装Meta的SDK（All-in-One）、修改项目的目标平台、使用Meta Project Setup Tool进行默认参数设置，安装Meta开发模拟器等。基本功能可以通过添加Building Blocks进行快速实现，详细信息可参考相关文档。</p>
+<h2 id="学习mr相关模块"><a class="header" href="#学习mr相关模块">学习MR相关模块</a></h2>
+<p>如果开发MR游戏，建议阅读官方的《MR设计指南》，了解常见的基本概念。你还需要熟悉以下功能模块：Passthrough、Scene、Spatial Anchors和MRUK工具包。在Meta Quest Developer Hub中，可以查找相关模块的代码示例进行补充学习。</p>
+<p>按照上述步骤，你就可以在Unity中开始编写MR应用，逐步实现“Hello World”级别的MR项目。</p>
+<h2 id="总结"><a class="header" href="#总结">总结</a></h2>
+<p>希望通过这篇文章，大家能够对VR、AR、MR技术和游戏开发有所了解，并能根据自己的兴趣和需求开发自己喜欢的游戏。从选择合适的设备到配置开发环境，逐步走向开发成功的第一步。</p>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="advanced_simulation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../game_development.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="game_development.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../../gameDevelopment/UEC++/UEC++.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -195,11 +237,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="advanced_simulation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../game_development.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="game_development.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../../gameDevelopment/UEC++/UEC++.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
@@ -219,13 +261,13 @@
         </script>
 
 
-        <script src="elasticlunr-ef4e11c1.min.js"></script>
-        <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-c2a407aa.js"></script>
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
 
-        <script src="clipboard-1626706a.min.js"></script>
-        <script src="highlight-abc7f01d.js"></script>
-        <script src="book-a0b12cfe.js"></script>
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
 
         <!-- Custom JS scripts -->
 
