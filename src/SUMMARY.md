@@ -2,7 +2,7 @@
 
 <!-- 这是备注 -->
 
-[介绍](README.md)
+[前言](README.md)
 
 - [游戏物理专题](./game_physcis.md)
   - [数学物理基础](./physics_math.md)
