@@ -14,8 +14,5 @@
 - [游戏开发](./game_development.md)
   - [MR游戏开发](./gameDevelopment/MR_game_development/MRgame.md)
   - [UEC++概念总结](./gameDevelopment/UEC++/UEC++.md)
-
-
-
-
+  - [基于PBR流程的游戏3D建模](./gameDevelopment/PBR_workflow/PBR_workflow.md)
 
