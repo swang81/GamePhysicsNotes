@@ -307,3 +307,418 @@ class AMyChild : public AMyActor // 需要完整定义
 AMyActor* Actor;
 Actor->SetActorLocation(...); // 不能访问成员，编译器不知道内容
 ```
+
+## 11.强制转换Cast
+
+在 Unreal Engine C++ 开发中，Cast 是最常用的类型安全强制转换方式，它用于在 UObject、Actor、Component 等类层级中进行类型转换，同时保证安全性。
+
+**Cast**是 UE 提供的模板函数，用于将父类指针或 UObject 指针转换为子类类型。如果转换成功，返回目标类型指针；失败返回 nullptr。例如：
+
+```C++
+AActor* SomeActor = ...;
+AMyCharacter* MyChar = Cast<AMyCharacter>(SomeActor);
+​
+if (MyChar)
+{
+    MyChar->DoSomething(); // 成功转换后可以安全调用
+}
+```
+
+Cast 使用的注意事项:
+- 检查失败情况：Cast 只有在对象真的是目标类型或子类时才会成功。UE C++ 中失败返回 nullptr，蓝图里走 Cast Failed 分支，必须做判空/分支处理。
+- 避免滥用：过多依赖 Cast 会让蓝图或 C++ 紧耦合，维护困难。推荐用接口、事件分发器或更明确的变量类型来减少 Cast。
+- 关注性能：单次 Cast 开销不大，但高频调用（如 Tick 或循环）中频繁使用会拖慢性能。建议 缓存 Cast 结果，避免重复转换。
+
+## 12.接口用法
+
+在UE中，Interfaces是一种有效的设计，多个类可以通过接口添加函数。比如，玩家可以通过接口与关卡内的不同Actor进行交互，每个Actor都有不同的反应。在UE C++中定义的接口，既可以在C++类里实现，也可以在蓝图类里实现。
+
+### 12.1 声明C++接口
+
+继承Uinterface定义一个接口，由于UE的约定，需要写两个类：UDoSomeThings和IDoSomeThings。  
+U前缀：UInterface继承UObject，用于反射系统。  
+I前缀：IDoSomeThings是接口类，存放自定义的函数。 
+
+```C++
+#include "CoreMinimal.h"
+#include "DoSomeThings.generated.h"
+​
+UINTERFACE(MinimalAPI)
+class UDoSomeThings : public UInterface
+{
+    GENERATED_BODY()
+    // 这里就是空的
+}
+​
+class YOURPROJECT_API IDoSomeThings
+{
+    GENERATED_BODY()
+public:    
+    // 这里写接口方法
+}
+```
+
+### 12.2 添加实现方法
+
+在接口中，用两种方式添加两个接口方法。
+
+```C++
+class YOURPROJECT_API IDoSomeThings
+{
+    GENERATED_BODY()
+public:    
+    // 1. C++接口方法
+    virtual void DoSomeThing() = 0;  // 必须virtual 
+    
+    // 2. UFUNCTION接口方法
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Things")
+    int GetNumberOfThings();
+};
+```
+
+- C++接口方法：必须在子类的C++中实现，不支持蓝图。比如,Gas系统的这个接口，也是C++接口。
+
+```C++
+virtual UAbilitySystemComponent* GetAbilitySystemComponent() const = 0;
+```
+- UFUNCTION接口方法：使用BlueprintNativeEvent宏修饰符时，在C++中可选实现。如果实现需要在_Implementation中实现逻辑。支持在蓝图中可以重写。如果使用BlueprintImplementableEvent，在C++中不能实现，必须要在蓝图中实现。所以，一般大家都使用BlueprintNativeEvent。
+
+UFUNCTION的接口方法，不需要写virtual, 主要是因为UFUNCTION()和GENERATED_BODY() 宏 会生成必要的虚函数声明。
+
+### 12.3 C++中实现接口
+继承接口，在cpp中写函数实现。
+
+```C++
+#include "CoreMinimal.h"
+#include "DoSomeThings.h"
+#include "SomeThingsActor.generated.h"
+​
+UCLASS(Blueprintable)
+class YOURPROJECT_API ASomeThingsActor : public AActor, public IDoSomeThings
+{
+    GENERATED_BODY()
+public:    
+    virtual void DoSomeThing() override;
+    virtual int GetNumberOfThings_Implementation() override;
+};
+#include "SomeThingsActor.h"
+​
+void ASomeThingsActor::DoSomeThing()
+{
+    //....
+}
+​
+int ASomeThingsActor::GetNumberOfThings_Implementation()
+{
+    return 1;
+}
+```
+
+### 12.4 在蓝图中实现接口
+可以在蓝图的Class Settings中添加刚才C++定义的接口。点击Implemented Interfaces中Add, 选择DoSomeThings。在Interfaces中，可以看到接口函数的定义。
+
+![](./images/blueInterfaceParameters.png)
+
+## 12.5 在C++和蓝图中调用
+
+在C++中调用接口，如果是C++实现的接口，可以直接使用Cast<IDoSomeThings>，例如
+
+```C++
+auto I = Cast<IDoSomeThings>(Actor);
+if (I)
+{
+    int Num = I->GetNumberOfThings();
+}
+```
+
+如果想在C++中，调用蓝图实现的接口方法，Cast<>方法会返回I = nullptr,因为C++不知道蓝图。可以使用反射系统检测蓝图的接口是否可用。检测的几种方法如下：
+
+```C++
+// 1. Implements
+if (Actor && Actor->Implements<UDoSomeThings>())
+{
+    // Use the interface
+}
+// 2. DoesImplementInterface 
+if (UKismetSystemLibrary::DoesImplementInterface(Actor, UDoSomeThings::StaticClass())
+{
+    // use the interface
+}
+// 3. ImplementsInterface
+if (Actor && Actor->GetClass()->ImplementsInterface(UDoSomeThings::StaticClass()))
+{
+    // use the interface    
+} 
+```
+
+检测到定义的接口函数，需要通过Interface wrapper调用接口，如下：
+
+```C++
+if (Actor && Actor->Implements<UDoSomeThings>())
+{
+    int Num = IDoSomeThings::Execute_GetNumberOfThings(Actor);
+}
+```
+
+在蓝图中调用，先判断，再调用接口函数。
+
+![](./images/useInterface.png)
+
+### 12.6 接口定义成变量
+如果想把接口像Class类型一样，保存成变量，需要在UE C++中使用（Blueprintable）宏修饰符。
+
+```C++
+UINTERFACE(Blueprintable)
+class UDoSomeThings : public UInterface
+{
+    GENERATED_BODY()
+};
+```
+
+在蓝图中，可以直接创建DoSomething类型的Interface变量IDo。如果把一个Actor类型变量保存成接口变量IDo，需要先Cast to DoSomeThings接口后，设定IDo变量。
+
+![](./images/castInterface.png)
+
+在C++中，需要创建接口变量需要使用TScriptInterface
+
+```C++
+UPROPERTY(BlueprintReadWrite)
+TScriptInterface<IDoSomeThings> SomethingInstance;
+```
+
+使用这个变量前可以判断是否为空，如果接口实现是在C++完成，可以直接使用。
+
+```C++
+int Num;
+if (SomethingInstance)
+{
+    Num = SomethingInstance->GetNumberOfThings();
+}
+```
+
+把实现接口的对象赋值给接口变量的方法如下，直接赋值
+
+```C++
+if (UKismetSystemLibrary::DoesImplementInterface(Actor, UDoSomeThings::StaticClass()))
+{
+    SomethingInstance = Actor;
+}
+```
+
+如果接口的实现是在蓝图中，需要使用
+
+```C++
+int Num = IDoSomeThings::Execute_GetNumberOfThings(SomethingInstance.GetObject());
+```
+
+使用UOBject类型变量，来直接执行接口也是一种方法。
+
+```C++
+UPROPERTY(BlueprintReadWrite)
+UObject* SomethingInstance;
+​
+if (SomethingInstance)
+{
+    int Num = IDoSomeThings::Execute_GetNumberOfThings(SomethingInstance);
+}
+```
+
+## 13.委托用法
+UE官方常见委托分类方式：单播，多播和动态。委托是一种常见的回调机制，让一个对象可以把事件通知到另一个对象，解耦逻辑。比如：角色受到伤害，通知UI，更新血条。
+
+### 13.1 单播委托
+Single cast delegate，只能绑定一个函数，没有反射，性能最好。只能在C++中使用，蓝图看不到。适合在“1对1”的通知，比如：一个异步任务完成，通知唯一的回调函数。
+
+**无参单播委托**
+
+```C++
+// 声明一个无参的单播委托
+DECLARE_DELEGATE(FOnFinished);
+​
+// 使用
+FOnFinished OnFinished;
+// 绑定
+OnFinished.BindUObject(this, &AMyActor::HandleFinished);
+​
+// 定义函数
+void AMyActor::HandleFinished()
+{
+    UE_LOG(LogTemp, Log, TEXT("Task Finished!"));
+}
+​
+// 调用
+if (OnFinished.IsBound())
+{
+    OnFinished.Execute();  
+    // 或者更安全：
+    // OnFinished.ExecuteIfBound();
+}
+```
+
+**带参数/返回值的单播委托**
+
+```C++
+// 声明一个带参数的单播委托
+DECLARE_DELEGATE_OneParam(FOnDamaged, float);
+​
+// 使用
+FOnDamaged OnDamaged;
+​
+// 绑定
+OnDamaged.BindUObject(this, &AMyActor::HandleDamaged);
+​
+// 定义函数
+void AMyActor::HandleDamaged(float Damage)
+{
+    UE_LOG(LogTemp, Log, TEXT("Actor took %f damage!"), Damage);
+}
+​
+// 调用
+if (OnDamaged.IsBound())
+{
+    OnDamaged.Execute(25.f);  // 传递参数
+}
+```
+
+带返回值的代理，只需要在宏定义时，使用带有“RetVal”关键字的宏，例如，在执行后获得返回值。其他使用过程类似。
+
+```C++
+// 声明
+DECLARE_DELEGATE_RetVal(int32, OnDamaged);
+// 返回值
+int32 Result = OnDamaged.Execute();
+```
+
+### 13.2 多播委托
+
+可以绑定多个函数，一个事件触发时，所有绑定都会被调用。性能依然很好。同样主要用于C++,蓝图不可见。
+
+```C++
+// 声明
+DECLARE_MULTICAST_DELEGATE(FOnDead);
+​
+// 使用
+FOnDead OnDead;
+OnDead.AddUObject(this, &AMyActor::HandleDeath);
+OnDead.AddLambda([](){ UE_LOG(LogTemp, Log, TEXT("Lambda called!")); });
+​
+// 触发
+OnDead.Broadcast();
+```
+
+### 13.3 动态单播
+
+支持反射，可以暴露给蓝图。可以是单播，也可以是多播。有一定性能开销。
+动态单播，一个委托绑定一个函数。如果绑定多个，后面的会覆盖前一个。
+
+```C++
+// 声明一个动态单播委托（无参数）
+DECLARE_DYNAMIC_DELEGATE(FSimpleDynamicDelegate);
+​
+// 声明一个动态单播委托（带参数）
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOnHealthChanged, float, NewHealth);
+UCLASS()
+class AMyActor : public AActor
+{
+    GENERATED_BODY()
+public:
+    // 定义成员变量
+    FSimpleDynamicDelegate OnSimpleEvent;
+    FOnHealthChanged OnHealthChanged;
+​
+    void TriggerEvent()
+    {
+        // 调用无参委托
+        OnSimpleEvent.ExecuteIfBound();
+        // 调用有参委托
+        OnHealthChanged.ExecuteIfBound(75.0f);
+    }
+};
+```
+
+绑定
+
+```C++
+// 在另一个类或蓝图中绑定
+MyActor->OnSimpleEvent.BindDynamic(this, &UMyComponent::HandleSimple);
+MyActor->OnHealthChanged.BindDynamic(this, &UMyComponent::HandleHealth);
+​
+// 回调函数格式必须是 UFUNCTION
+UFUNCTION()
+void HandleSimple() { UE_LOG(LogTemp, Warning, TEXT("Simple event triggered!")); }
+​
+UFUNCTION()
+void HandleHealth(float Value) { UE_LOG(LogTemp, Warning, TEXT("Health: %f"), Value); }
+```
+
+### 13.4 动态多播
+
+
+动态多播，一个委托可以绑定多个函数。触发时会顺序调用所有绑定的回调。声明如下：
+
+```C++
+// 无参数
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSimpleMulticastDelegate);
+​
+// 带参数
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnScoreChanged, int32, NewScore);
+
+```
+
+像下面的方法进行使用：
+
+```C++
+UCLASS()
+class AMyActor : public AActor
+{
+    GENERATED_BODY()
+​
+public:
+    // 使用 UPROPERTY，支持蓝图绑定
+    UPROPERTY(BlueprintAssignable)
+    FSimpleMulticastDelegate OnSimpleEvent;
+​
+    UPROPERTY(BlueprintAssignable)
+    FOnScoreChanged OnScoreChanged;
+​
+    void TriggerEvent()
+    {
+        // 触发多播委托（依次调用所有绑定函数）
+        OnSimpleEvent.Broadcast();
+        OnScoreChanged.Broadcast(100);
+    }
+    
+    UFUNCTION()
+    void HandleSimple() { UE_LOG(LogTemp, Warning, TEXT("Multicast simple event!")); }
+​
+    UFUNCTION()
+    void HandleScore(int32 Score) { UE_LOG(LogTemp, Warning, TEXT("Score: %d"), Score); }
+};
+```
+
+**动态多播绑定**
+
+```C++
+// C++绑定
+MyActor->OnSimpleEvent.AddDynamic(this, &UMyComponent::HandleSimple);
+MyActor->OnScoreChanged.AddDynamic(this, &UMyComponent::HandleScore);
+​
+// C++解绑
+MyActor->OnScoreChanged.RemoveDynamic(this, &UMyComponent::HandleScore);
+​
+// 蓝图绑定
+// 因为用 UPROPERTY(BlueprintAssignable)，蓝图里可以直接拖节点绑定
+```
+
+下面是蓝图中的动态绑定
+![](./images/bindEvent.png)
+
+### 13.5 委托总结
+
+|          | 常见定义宏                         | 绑定方式                                 | 支持蓝图 | 绑定函数个数 |
+| -------- | ---------------------------------- | ---------------------------------------- | -------- | ------------ |
+| 单播     | `DECLARE_DELEGATE`                   | `Delegate.BindUObject(this, &Class::Func)` | X        | 1            |
+| 多播     | `DECLARE_MULTICAST_DELEGATE`         | `Delegate.AddUObject(this, &Class::Func)`  | X        | 多个         |
+| 动态单播 | `DECLARE_DYNAMIC_DELEGATE`           | `Delegate.BindDynamic(this, &Class::Func)` | V        | 1            |
+| 动态多播 | `DECLARE_DYNAMIC_MULTICAST_DELEGATE` | `Delegate.AddDynamic(this, &Class::Func)`  | V        | 多个         |
+

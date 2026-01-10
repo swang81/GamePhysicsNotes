@@ -1,7 +1,8 @@
 [book]
-title = "Game Physics Notes"
+title = "Game Physics & Development Notes"
 authors = ["jack wang"]
-language = "en"
+language = "zh"
 
 [output.html]
 mathjax-support = true
+

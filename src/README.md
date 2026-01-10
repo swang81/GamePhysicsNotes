@@ -1,5 +1,5 @@
 
-# Game Physics Notes
+# Game Physics and Development Notes
 
 作者：小杰克  
 个人主页：[https://swang81.github.io/](https://swang81.github.io/)
