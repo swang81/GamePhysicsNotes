@@ -1,0 +1,7 @@
+# mdbook build output
+/book/
+
+# Editor directories
+.DS_Store
+.vscode/
+.idea/

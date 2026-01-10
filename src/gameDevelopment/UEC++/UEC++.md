@@ -421,7 +421,7 @@ int ASomeThingsActor::GetNumberOfThings_Implementation()
 
 ## 12.5 在C++和蓝图中调用
 
-在C++中调用接口，如果是C++实现的接口，可以直接使用Cast<IDoSomeThings>，例如
+在C++中调用接口，如果是C++实现的接口，可以直接使用`Cast<IDoSomeThings>`，例如
 
 ```C++
 auto I = Cast<IDoSomeThings>(Actor);
