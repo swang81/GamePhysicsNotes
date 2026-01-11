@@ -13,49 +13,36 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon-de23e50b.svg">
-        <link rel="shortcut icon" href="favicon-8114d1fc.png">
-        <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-2459343d.css">
-        <link rel="stylesheet" href="css/chrome-ae938929.css">
-        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
-        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
-        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-        <!-- MathJax -->
-        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
         <!-- Provide site root and default themes to javascript -->
         <script>
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-0fa12c85.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-8baeaf6f.js"></script>
+        <script src="toc.js"></script>
     </head>
     <body>
-    <div id="mdbook-help-container">
-        <div id="mdbook-help-popup">
-            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
-            <div>
-                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
-                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
-                <p>Press <kbd>?</kbd> to show this help</p>
-                <p>Press <kbd>Esc</kbd> to hide this help</p>
-            </div>
-        </div>
-    </div>
-    <div id="mdbook-body-container">
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
@@ -84,59 +71,56 @@
             html.classList.add("js");
         </script>
 
-        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
             let sidebar = null;
-            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
-                sidebar_toggle.checked = false;
             }
-            if (sidebar === 'visible') {
-                sidebar_toggle.checked = true;
-            } else {
-                html.classList.remove('sidebar-visible');
-            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
-        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
                 <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
             </noscript>
-            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <div id="mdbook-page-wrapper" class="page-wrapper">
+        <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="mdbook-menu-bar-hover-placeholder"></div>
-                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
-                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
                         </label>
-                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
-                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
                         </button>
-                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
-                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
                         </button>
                     </div>
 
@@ -144,80 +128,115 @@
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
-                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                            <i id="print-button" class="fa fa-print"></i>
                         </a>
 
                     </div>
                 </div>
 
-                <div id="mdbook-search-wrapper" class="hidden">
-                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
-                        <div class="search-wrapper">
-                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
-                            <div class="spinner-wrapper">
-                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
-                            </div>
-                        </div>
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
-                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
-                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
-                        <ul id="mdbook-searchresults">
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
                         </ul>
                     </div>
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script>
-                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
-                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
                     });
                 </script>
 
-                <div id="mdbook-content" class="content">
+                <div id="content" class="content">
                     <main>
-                        <h1 id="简介"><a class="header" href="#简介">简介</a></h1>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<h1 id="简介"><a class="header" href="#简介">简介</a></h1>
 <p>《Game Physics and Development Notes》是一份围绕游戏物理与游戏开发实践的长期笔记，记录了从物理建模到工程实现，再到实际游戏应用过程中的关键思考与取舍。</p>
-<p>本笔记面向具备一定技术背景、希望深入理解**游戏物理“为什么这样实现”**的开发者，强调原理、工程经验与实际问题之间的联系，而非公式堆砌或 API 使用说明。</p>
-<p>作者：小杰克<br>个人主页：<a href="https://swang81.github.io/">https://swang81.github.io/</a></p>
+<p>本笔记面向具备一定技术背景、希望深入理解"游戏物理为什么这样实现"的开发者，强调原理、工程经验与实际问题之间的联系，而非公式堆砌或 API 使用说明。</p>
+<p>作者：小杰克<br />
+个人主页：<a href="https://swang81.github.io/">https://swang81.github.io/</a></p>
 <ul>
 <li>
-<p>📘 在线阅读（GitHub Pages）：<br><a href="https://swang81.github.io/GamePhysicsNotes/">GamePhysicsNotes</a></p>
+<p>📘 在线阅读（GitHub Pages）：<br />
+<a href="https://swang81.github.io/GamePhysicsNotes/">GamePhysicsNotes</a></p>
 </li>
 <li>
-<p>💻 GitHub 仓库：<br><a href="https://github.com/swang81/GamePhysicsNotes">swang81/GamePhysicsNotes</a></p>
+<p>💻 GitHub 仓库：<br />
+<a href="https://github.com/swang81/GamePhysicsNotes">swang81/GamePhysicsNotes</a></p>
 </li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="游戏物理专题"><a href="#游戏物理专题" class="header">游戏物理专题</a></h1>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="数学物理基础"><a href="#数学物理基础" class="header">数学物理基础</a></h1>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="碰撞检测"><a href="#碰撞检测" class="header">碰撞检测</a></h1>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="动力学与约束求解"><a href="#动力学与约束求解" class="header">动力学与约束求解</a></h1>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="高级物理模拟"><a href="#高级物理模拟" class="header">高级物理模拟</a></h1>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="物理可视化与调试"><a href="#物理可视化与调试" class="header">物理可视化与调试</a></h1>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="游戏开发"><a href="#游戏开发" class="header">游戏开发</a></h1>
-<div style="break-before: page; page-break-before: always;"></div>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<h1 id="物理引擎中符号和单位"><a class="header" href="#物理引擎中符号和单位">物理引擎中符号和单位</a></h1>
+<h2 id="引言"><a class="header" href="#引言">引言</a></h2>
+<p>本文为物理引擎系列的开篇，本文详细介绍物理引擎的几个约定：符号、单位、坐标系。</p>
+<h2 id="符号约定"><a class="header" href="#符号约定">符号约定</a></h2>
+<p><strong>标量</strong>（Scalar）通常用斜体字母表示，如质量<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span>或时间<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span></span></span></span>。</p>
+<p><strong>向量</strong>（Vector）则通常用粗体小写字母,例如<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6389em;vertical-align:-0.1944em;"></span><span class="mord mathbf">p</span></span></span></span>, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4444em;"></span><span class="mord mathbf" style="margin-right:0.01597em;">v</span></span></span></span>,<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6861em;"></span><span class="mord mathbf">F</span></span></span></span>。或带箭头的字母，如<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9084em;vertical-align:-0.1944em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">p</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1522em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5 3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11 10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63 -1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1 -7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59 H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359 c-16-25.333-24-45-24-59z'/></svg></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1944em;"><span></span></span></span></span></span></span></span></span>,<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.714em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2077em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5 3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11 10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63 -1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1 -7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59 H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359 c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></span></span></span></span>,<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9663em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1522em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5 3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11 10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63 -1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1 -7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59 H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359 c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></span></span></span></span>表示。我们将优先采用粗体字母表示向量。</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">物理量</th><th style="text-align: left">标量符号</th><th style="text-align: left">向量符号</th><th style="text-align: left">MKS单位</th><th style="text-align: left">描述</th></tr></thead><tbody>
+<tr><td style="text-align: left">时间 (Time)</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span></span></span></span></td><td style="text-align: left">-</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span></span></span></span> (秒)</td><td style="text-align: left">描述事件发生的时刻或持续时间。</td></tr>
+<tr><td style="text-align: left">质量 (Mass)</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span></td><td style="text-align: left">-</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span></span></span></span> (千克)</td><td style="text-align: left">物体惯性的量度。</td></tr>
+<tr><td style="text-align: left">位置 (Position)</td><td style="text-align: left">-</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6389em;vertical-align:-0.1944em;"></span><span class="mord mathbf">p</span></span></span></span> 或 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4444em;"></span><span class="mord mathbf">x</span></span></span></span></td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span> (米)</td><td style="text-align: left">物体在世界空间中的坐标。</td></tr>
+<tr><td style="text-align: left">位移 (Displacement)</td><td style="text-align: left">-</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8805em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathbf">Δp</span></span></span></span></span></td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span> (米)</td><td style="text-align: left">位置的变化量。</td></tr>
+<tr><td style="text-align: left">速度 (Velocity)</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span></span> (速率)</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4444em;"></span><span class="mord mathbf" style="margin-right:0.01597em;">v</span></span></span></span></td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">m</span><span class="mord">/</span><span class="mord mathnormal">s</span></span></span></span></td><td style="text-align: left">位置随时间的变化率。</td></tr>
+<tr><td style="text-align: left">加速度 (Acceleration)</td><td style="text-align: left"></td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4444em;"></span><span class="mord mathbf">a</span></span></span></span></td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord mathnormal">m</span><span class="mord">/</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></td><td style="text-align: left">速度随时间的变化率。</td></tr>
+<tr><td style="text-align: left">力 (Force)</td><td style="text-align: left">-</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6861em;"></span><span class="mord mathbf">F</span></span></span></span></td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span> (牛顿)</td><td style="text-align: left">导致物体加速度的原因。</td></tr>
+<tr><td style="text-align: left">冲量 (Impulse)</td><td style="text-align: left">-</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6861em;"></span><span class="mord mathbf">J</span></span></span></span></td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span></span></span></span></td><td style="text-align: left">力在一段时间上的累积效应。</td></tr>
+<tr><td style="text-align: left">动量 (Momentum)</td><td style="text-align: left">-</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6389em;vertical-align:-0.1944em;"></span><span class="mord mathbf">p</span></span></span></span></td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">m</span><span class="mord">/</span><span class="mord mathnormal">s</span></span></span></span></td><td style="text-align: left">物体质量和速度的乘积。</td></tr>
+<tr><td style="text-align: left">角度 (Angle)</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span></span></span></span></td><td style="text-align: left">-</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">a</span><span class="mord mathnormal">d</span></span></span></span> (弧度)</td><td style="text-align: left">描述物体的朝向或旋转量。</td></tr>
+<tr><td style="text-align: left">角速度 (Angular Velocity)</td><td style="text-align: left">-</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4444em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right:0.03704em;">ω</span></span></span></span></span></span> (omega)</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">a</span><span class="mord mathnormal">d</span><span class="mord">/</span><span class="mord mathnormal">s</span></span></span></span></td><td style="text-align: left">角度随时间的变化率。</td></tr>
+<tr><td style="text-align: left">角加速度 (Angular Acceleration)</td><td style="text-align: left">-</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4444em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol">α</span></span></span></span></span></span> (alpha)</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">a</span><span class="mord mathnormal">d</span><span class="mord">/</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></td><td style="text-align: left">角速度随时间的变化率。</td></tr>
+<tr><td style="text-align: left">力矩 (Torque)</td><td style="text-align: left">-</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4444em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right:0.13472em;">τ</span></span></span></span></span></span> (tau)</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span></td><td style="text-align: left">导致物体角加速度的原因。</td></tr>
+<tr><td style="text-align: left">转动惯量 (Moment of Inertia)</td><td style="text-align: left"></td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6861em;"></span><span class="mord mathbf">I</span></span></span></span> (惯性张量)</td><td style="text-align: left"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></td><td style="text-align: left">物体对旋转运动的阻力。</td></tr>
+</tbody></table>
+</div>
+<h2 id="单位制"><a class="header" href="#单位制">单位制</a></h2>
+<p>绝大多数现代物理引擎，如<strong>Box2D</strong>和<strong>NVIDIA PhysX</strong>，都强烈推荐或内部默认使用 <strong>MKS单位制</strong>，它是国际单位制（SI）的一部分。该系统以米（Meter）、千克（Kilogram）和秒（Second）作为基本单位。所有其他物理量的单位都由这三个基本单位导出，例如力的单位牛顿（N）定义为 kg·m/s²。</p>
+<h2 id="坐标系约定"><a class="header" href="#坐标系约定">坐标系约定</a></h2>
+<h3 id="右手和左手坐标系"><a class="header" href="#右手和左手坐标系">右手和左手坐标系</a></h3>
+<p>坐标系定义了空间中点的位置和方向，是进行任何几何计算的基础。在3D空间中，主要存在两种手性（Chirality）的坐标系：<strong>右手坐标系</strong>和<strong>左手坐标系</strong>。</p>
+<ul>
+<li>
+<p><strong>右手坐标系 (Right-Handed System)</strong>：这是数学和物理学界的标准。你可以用右手来判断：伸出食指指向X轴正方向，中指指向Y轴正方向，那么拇指的指向就是Z轴的正方向。<strong>OpenGL</strong>、<strong>Bullet</strong> 和大部分物理引擎都使用右手坐标系。</p>
+</li>
+<li>
+<p><strong>左手坐标系 (Left-Handed System)</strong>：用左手可以进行类似判断。食指指向X轴正方向，中指指向Y轴正方向，拇指指向Z轴正方向。<strong>Direct3D</strong> 、 <strong>Unity</strong>和<strong>UE</strong> 引擎使用左手坐标系。</p>
+</li>
+</ul>
+<p>两种坐标系之间的转换可以通过反转其中一个轴的坐标来实现。例如，从右手系转换到左手系，可以令 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span></span></span></span>。在混合使用不同坐标系约定的库（例如，使用左手系的渲染引擎和使用右手系的物理引擎）时，必须在数据交换的边界处进行正确的坐标转换。</p>
+<h3 id="向上的方向"><a class="header" href="#向上的方向">向上的方向</a></h3>
+<p>另一个重要的约定是哪个轴代表“上”方向。最常见的两种约定是：</p>
+<ul>
+<li><strong>Y-Up</strong>：Y轴的正方向为“上”。这在2D游戏和许多3D建模软件（如Blender）中很常见。</li>
+<li><strong>Z-Up</strong>：Z轴的正方向为“上”。这在建筑和CAD领域以及某些3D引擎（如Unreal Engine）中更为流行。</li>
+</ul>
+<p>各种软件，坐标系和向上的约定可以参考Freya总结的图。</p>
+<p><img src="gamePhysics/./images/coordinate.jpg" alt="" /></p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <h1 id="混合现实mr游戏开发入门"><a class="header" href="#混合现实mr游戏开发入门">混合现实（MR）游戏开发入门</a></h1>
 <p>近年来，虚拟现实（VR）、增强现实（AR）和混合现实（MR）技术的迅速崛起，推动了游戏开发进入全新的维度。作为一名VR/MR游戏开发者，我亲眼见证了技术的不断进步与升级。从微软第一代HoloLens头显到HTC Vive，再到Quest、Quest 2，直到如今为Meta Quest 3开发游戏，我深刻感受到了这些技术如何颠覆传统2D和3D视觉表现，并重新定义了游戏的交互方式和沉浸感体验。</p>
 <p>许多朋友常常问我：“VR、AR和MR有何区别？”、“购买哪个头显最合适？”、“有哪些好玩的VR、MR游戏？”为了解答这些问题，我决定写这篇文章，探讨这三种技术的核心特点及其在游戏中的应用，介绍主流游戏设备，并为开发者梳理Meta Quest 3的Unity开发路线。</p>
 <h2 id="vr游戏沉浸式虚拟体验"><a class="header" href="#vr游戏沉浸式虚拟体验">VR游戏：沉浸式虚拟体验</a></h2>
 <p>VR（虚拟现实）游戏让玩家通过头戴显示设备（HMD）完全沉浸在虚拟环境中。通过视觉、听觉以及手柄的振动反馈，VR游戏为玩家提供了高度的沉浸感。</p>
 <p>推荐一款科幻风的VR游戏——《红色物质2》（Red Matter 2）。这款屡获殊荣的沉浸式解谜冒险游戏，让玩家扮演特工Sasha，在月球基地揭开神秘的“红物质”背后的秘密。游戏使用优化后的Unreal Engine进行渲染，营造了一个科幻的环境，带来极具沉浸感的游戏体验。</p>
-<p><img src="gameDevelopment/MR_game_development/images/redMatter.jpg" alt="RedMatter"></p>
+<p><img src="gameDevelopment/MR_game_development/./images/redMatter.jpg" alt="RedMatter" /></p>
 <h2 id="ar游戏现实与虚拟的融合"><a class="header" href="#ar游戏现实与虚拟的融合">AR游戏：现实与虚拟的融合</a></h2>
 <p>与VR游戏不同，AR游戏通过智能手机、AR眼镜或平板电脑等设备，通过设备上的摄像头捕捉现实世界图像，并将虚拟物体叠加到这些现实图像中，从而为玩家呈现现实与虚拟融合的场景。</p>
 <p>推荐一款AR手机游戏——《宇宙战线 AR》。在这款游戏中，玩家将化身为宇宙舰队指挥官，指挥自己的舰队在浩瀚的宇宙中与敌人展开激烈战斗。游戏利用AR技术将虚拟战舰与现实环境结合，你在家中的客厅可以指挥舰队与敌舰、激光炮火展开战斗。</p>
 <h2 id="mr游戏虚拟与现实的深度交互"><a class="header" href="#mr游戏虚拟与现实的深度交互">MR游戏：虚拟与现实的深度交互</a></h2>
 <p>MR（混合现实）游戏将VR和AR的特点结合，提供更为自然的交互体验。玩家佩戴MR头显后，不仅能看到虚拟元素，还能与真实世界进行深度互动。MR设备通过理解周围环境，实现虚拟元素与现实物体的实时交互。</p>
 <p>推荐最新发行的MR游戏—《空间特工队》（Spatial Ops）。这款游戏被誉为MR模式下的FPS游戏，提供单人战役模式与竞技场模式。在单人模式中，玩家扮演一名特工，在激烈的射击战斗中保护现实世界；而竞技场模式则让玩家将家中的空间瞬间转变为战场，体验科幻版的CS。</p>
-<p><img src="gameDevelopment/MR_game_development/images/spatialOps.jpg" alt="SpatialOps"></p>
+<p><img src="gameDevelopment/MR_game_development/./images/spatialOps.jpg" alt="SpatialOps" /></p>
 <h2 id="设备推荐主流硬件分析"><a class="header" href="#设备推荐主流硬件分析">设备推荐：主流硬件分析</a></h2>
 <p>在VR、AR和MR技术中，目前VR和MR游戏应用最为广泛。以下是一些主要硬件设备的介绍：</p>
 <p><strong>Meta Quest系列</strong>：由Facebook推出，是全球销量领先的头显设备。以Quest 3为例，这款设备搭载了骁龙XR2 Gen 2处理器，单眼分辨率高达2064×2208，刷新率可达到90Hz，售价大约在3000-4000元之间，是同价位中性能表现最优的选择。游戏需要通过Meta商店购买，由于网络原因，在国内使用时需要借助加速器。适合对硬件配置和系统设置有一定了解的用户。</p>
@@ -246,7 +265,7 @@
 <p>按照上述步骤，你就可以在Unity中开始编写MR应用，逐步实现“Hello World”级别的MR项目。</p>
 <h2 id="总结"><a class="header" href="#总结">总结</a></h2>
 <p>希望通过这篇文章，大家能够对VR、AR、MR技术和游戏开发有所了解，并能根据自己的兴趣和需求开发自己喜欢的游戏。从选择合适的设备到配置开发环境，逐步走向开发成功的第一步。</p>
-<div style="break-before: page; page-break-before: always;"></div>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <h1 id="ue-c-相关内容总结"><a class="header" href="#ue-c-相关内容总结">UE C++ 相关内容总结</a></h1>
 <h2 id="1作为-ue-程序员为什么都需要掌握-ue-c和蓝图编程"><a class="header" href="#1作为-ue-程序员为什么都需要掌握-ue-c和蓝图编程">1.作为 UE 程序员为什么都需要掌握 UE C++和蓝图编程？</a></h2>
 <p>因为二者在引擎中的定位不同，却又相辅相成：</p>
@@ -534,7 +553,9 @@ if (MyChar)
 <h2 id="12接口用法"><a class="header" href="#12接口用法">12.接口用法</a></h2>
 <p>在UE中，Interfaces是一种有效的设计，多个类可以通过接口添加函数。比如，玩家可以通过接口与关卡内的不同Actor进行交互，每个Actor都有不同的反应。在UE C++中定义的接口，既可以在C++类里实现，也可以在蓝图类里实现。</p>
 <h3 id="121-声明c接口"><a class="header" href="#121-声明c接口">12.1 声明C++接口</a></h3>
-<p>继承Uinterface定义一个接口，由于UE的约定，需要写两个类：UDoSomeThings和IDoSomeThings。<br>U前缀：UInterface继承UObject，用于反射系统。<br>I前缀：IDoSomeThings是接口类，存放自定义的函数。</p>
+<p>继承Uinterface定义一个接口，由于UE的约定，需要写两个类：UDoSomeThings和IDoSomeThings。<br />
+U前缀：UInterface继承UObject，用于反射系统。<br />
+I前缀：IDoSomeThings是接口类，存放自定义的函数。</p>
 <pre><code class="language-C++">#include "CoreMinimal.h"
 #include "DoSomeThings.generated.h"
 ​
@@ -603,7 +624,7 @@ int ASomeThingsActor::GetNumberOfThings_Implementation()
 </code></pre>
 <h3 id="124-在蓝图中实现接口"><a class="header" href="#124-在蓝图中实现接口">12.4 在蓝图中实现接口</a></h3>
 <p>可以在蓝图的Class Settings中添加刚才C++定义的接口。点击Implemented Interfaces中Add, 选择DoSomeThings。在Interfaces中，可以看到接口函数的定义。</p>
-<p><img src="gameDevelopment/UEC++/images/blueInterfaceParameters.png" alt=""></p>
+<p><img src="gameDevelopment/UEC++/./images/blueInterfaceParameters.png" alt="" /></p>
 <h2 id="125-在c和蓝图中调用"><a class="header" href="#125-在c和蓝图中调用">12.5 在C++和蓝图中调用</a></h2>
 <p>在C++中调用接口，如果是C++实现的接口，可以直接使用<code>Cast&lt;IDoSomeThings&gt;</code>，例如</p>
 <pre><code class="language-C++">auto I = Cast&lt;IDoSomeThings&gt;(Actor);
@@ -636,7 +657,7 @@ if (Actor &amp;&amp; Actor-&gt;GetClass()-&gt;ImplementsInterface(UDoSomeThings:
 }
 </code></pre>
 <p>在蓝图中调用，先判断，再调用接口函数。</p>
-<p><img src="gameDevelopment/UEC++/images/useInterface.png" alt=""></p>
+<p><img src="gameDevelopment/UEC++/./images/useInterface.png" alt="" /></p>
 <h3 id="126-接口定义成变量"><a class="header" href="#126-接口定义成变量">12.6 接口定义成变量</a></h3>
 <p>如果想把接口像Class类型一样，保存成变量，需要在UE C++中使用（Blueprintable）宏修饰符。</p>
 <pre><code class="language-C++">UINTERFACE(Blueprintable)
@@ -646,7 +667,7 @@ class UDoSomeThings : public UInterface
 };
 </code></pre>
 <p>在蓝图中，可以直接创建DoSomething类型的Interface变量IDo。如果把一个Actor类型变量保存成接口变量IDo，需要先Cast to DoSomeThings接口后，设定IDo变量。</p>
-<p><img src="gameDevelopment/UEC++/images/castInterface.png" alt=""></p>
+<p><img src="gameDevelopment/UEC++/./images/castInterface.png" alt="" /></p>
 <p>在C++中，需要创建接口变量需要使用TScriptInterface</p>
 <pre><code class="language-C++">UPROPERTY(BlueprintReadWrite)
 TScriptInterface&lt;IDoSomeThings&gt; SomethingInstance;
@@ -831,22 +852,15 @@ MyActor-&gt;OnScoreChanged.RemoveDynamic(this, &amp;UMyComponent::HandleScore);
 // 因为用 UPROPERTY(BlueprintAssignable)，蓝图里可以直接拖节点绑定
 </code></pre>
 <p>下面是蓝图中的动态绑定
-<img src="gameDevelopment/UEC++/images/bindEvent.png" alt=""></p>
+<img src="gameDevelopment/UEC++/./images/bindEvent.png" alt="" /></p>
 <h3 id="135-委托总结"><a class="header" href="#135-委托总结">13.5 委托总结</a></h3>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th></th><th>常见定义宏</th><th>绑定方式</th><th>支持蓝图</th><th>绑定函数个数</th></tr>
-</thead>
-<tbody>
+<div class="table-wrapper"><table><thead><tr><th></th><th>常见定义宏</th><th>绑定方式</th><th>支持蓝图</th><th>绑定函数个数</th></tr></thead><tbody>
 <tr><td>单播</td><td><code>DECLARE_DELEGATE</code></td><td><code>Delegate.BindUObject(this, &amp;Class::Func)</code></td><td>X</td><td>1</td></tr>
 <tr><td>多播</td><td><code>DECLARE_MULTICAST_DELEGATE</code></td><td><code>Delegate.AddUObject(this, &amp;Class::Func)</code></td><td>X</td><td>多个</td></tr>
 <tr><td>动态单播</td><td><code>DECLARE_DYNAMIC_DELEGATE</code></td><td><code>Delegate.BindDynamic(this, &amp;Class::Func)</code></td><td>V</td><td>1</td></tr>
 <tr><td>动态多播</td><td><code>DECLARE_DYNAMIC_MULTICAST_DELEGATE</code></td><td><code>Delegate.AddDynamic(this, &amp;Class::Func)</code></td><td>V</td><td>多个</td></tr>
-</tbody>
-</table>
-</div>
-<div style="break-before: page; page-break-before: always;"></div>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <h1 id="基于pbr流程的游戏3d建模"><a class="header" href="#基于pbr流程的游戏3d建模">基于PBR流程的游戏3D建模</a></h1>
 <p>在前两期中，我们分享了3D建模的多种方法以及游戏PBR（基于物理的渲染）纹理相关知识。本期将重点介绍PBR流程的建模过程。目前网上关于PBR建模的分享视频教程种类繁多，工具使用各异，初学者常常感到眼花缭乱。本文旨在帮助大家理解高质量3D游戏资产的制作框架，从而在学习其他艺术家的制作流程时不再迷茫。</p>
 <p>本次分享分为三部分：首先介绍3D模型的特点，然后通过复刻一把废土风格的手枪来了解次世代建模的具体流程，最后分享我学习3D游戏建模的一些心得体会。</p>
@@ -868,38 +882,38 @@ MyActor-&gt;OnScoreChanged.RemoveDynamic(this, &amp;UMyComponent::HandleScore);
 <p>中模是3D建模的基础模型，决定了最终形态的轮廓和比例。此阶段的重点是确保模型的形状清晰，能为后续的细节雕刻和优化打下基础。我们需要注意多边形的数量和几何形状的合理性。在整个建模流程中，模型按多边形数量，会分为低模、中模和高模。低模用于游戏中的实时渲染，负责主要形状和轮廓。高模则用于细节雕刻，通常会包含更多的多边形。中模是介于两者之间的模型。下图展示的是我们使用3ds Max制作的一个枪的中模模型，它帮助我们确定了
 模型的基本形状和比例。</p>
 <p><strong>常用工具</strong>：Maya、3ds Max和Blender是常见的建模工具，用户可以根据个人习惯选择。中模建模时，我们通常使用多边形建模方法，保持模型的灵活性。</p>
-<p><img src="gameDevelopment/PBR_workflow/images/middleModel.webp" alt=""></p>
+<p><img src="gameDevelopment/PBR_workflow/./images/middleModel.webp" alt="" /></p>
 <p>3.高模雕刻</p>
 <p>在这一阶段，我们将中模导入到雕刻软件中，进一步添加细节。这一过程尤为关键，因为它直接决定了最终模型的精细度。下图，是利用ZBrush雕刻废土枪的边缘，模拟焊接的效果。</p>
 <p><strong>常用工具</strong>：ZBrush是常见的雕刻软件，艺术家可以通过刷子、笔触等工具进行细节雕刻，如表面划痕、褶皱、焊接痕迹等。这些细节的雕刻帮助模型呈现更加真实的效果，特别是在细节丰富的硬表面（如枪械、机械等）上非常重要。</p>
-<p><img src="gameDevelopment/PBR_workflow/images/zbrush.webp" alt=""></p>
+<p><img src="gameDevelopment/PBR_workflow/./images/zbrush.webp" alt="" /></p>
 <p>4.低模制作与UV展开</p>
 <p>低模的制作包括对中模进行删减、优化并将其转换成低多边形模型。低模的多边形数量要足够低，以保证游戏的运行效率，但同时又要能够保留足够的形状和细节。合理的多边形分布和拓扑结构非常重要。在这个阶段，我们还需要展开UV，以便后续贴图的制作。在UV展开过程中，模型的表面被“拆解”成平面，形成一个UV图集。需要避免“接缝”问题，确保纹理能够无缝地贴合到模型表面。</p>
 <p><strong>常用工具</strong>：常见的建模工具可以进行UV展开。复杂的模型可以使用专业工具（如RizomUV）来进行UV展开，这样能够大大提高效率和精度。下图是RizomUV工具的界面，可以看到很多复杂的UV可以被自动摆好。</p>
-<p><img src="gameDevelopment/PBR_workflow/images/uv.webp" alt=""></p>
+<p><img src="gameDevelopment/PBR_workflow/./images/uv.webp" alt="" /></p>
 <p>5.烘焙法线贴图和AO</p>
 <p>这一步的关键是将高模的细节转移到低模上，以提升低多边形模型的细节表现。通过烘焙生成法线贴图和AO贴图，能有效增强低模的细节感与立体感。法线贴图：它能够模拟模型表面细节（如划痕、凹陷等表面细节），无需增加多边形数目，从而在保持低多边形的同时展现丰富的细节。AO贴图：它用于模拟物体间的阴影效果，增强模型的立体感和真实感，特别是在光线较弱的区域。在这一步，我们需要确保烘焙效果的准确性，避免出现错位或不自然的阴影。如果法线贴图或AO贴图存在瑕疵，通常需要借助绘图软件进行手动修正，以确保最终效果的精确和自然。</p>
 <p><strong>常见工具</strong>：Marmoset Toolbag和Substance Painter都可以用于烘焙法线和AO贴图。修改贴图可以使用Photoshop。</p>
-<p><img src="gameDevelopment/PBR_workflow/images/bake.webp" alt=""></p>
+<p><img src="gameDevelopment/PBR_workflow/./images/bake.webp" alt="" /></p>
 <p>6.制作材质贴图</p>
 <p>材质的表现是PBR流程中至关重要的一环，决定了模型在不同光照条件下的外观。此步骤我们将低模模型和法线贴图、OA贴图，导入Substance Painter（简称SP），并通过该工具制作材质贴图。在SP中，我们通常会制作几种基础的贴图，如BaseColor、Emissive、Roughness、Metallic等，也会在Normal贴图上添加一些表面细节。</p>
 <p><strong>常见工具</strong>：Marmoset Toolbag和Substance Painter是常用的烘焙法线和AO贴图的工具，能够高效地将高模细节转移到低模上。对于贴图的修改与精细调整，可以使用Photoshop等图像处理软件，进一步优化贴图效果。</p>
-<p><img src="gameDevelopment/PBR_workflow/images/sp.webp" alt=""></p>
+<p><img src="gameDevelopment/PBR_workflow/./images/sp.webp" alt="" /></p>
 <p>7.导入游戏引擎测试</p>
 <p>完成贴图制作后，将低模和材质贴图导入到游戏引擎中（如Unity或Unreal Engine），测试模型在实时渲染中的效果。这一步骤能够帮助我们检查光照效果、材质表现以及模型是否适应引擎的要求。检查帧数表现(FPS)，确保模型不会导致过高的渲染负担，特别是在多边形数量和纹理大小方面。</p>
 <p>8.作品展示</p>
 <p>最后，为了最大程度地展示模型的细节和质感，3D艺术家通常会使用专门的渲染器（如Marmoset Toolbag、V-Ray等）进行渲染。渲染器可以精准模拟光照、阴影、材质反射等效果，帮助艺术家展示模型的最终效果。如下图，在画面中，可以清晰区别不同的材质表现。</p>
-<p><img src="gameDevelopment/PBR_workflow/images/show1.webp" alt="">
-<img src="gameDevelopment/PBR_workflow/images/show2.webp" alt=""></p>
+<p><img src="gameDevelopment/PBR_workflow/./images/show1.webp" alt="" />
+<img src="gameDevelopment/PBR_workflow/./images/show2.webp" alt="" /></p>
 <p>通过这些步骤，我们能够完成一个完整的基于PBR流程的3D模型制作。希望通过这一详细的过程，大家能够更加清晰地理解每个阶段的工作重点，以及如何高效地进行3D建模创作。</p>
 <h2 id="三一些心得体会"><a class="header" href="#三一些心得体会">三、一些心得体会</a></h2>
 <p>经过几个月的系统学习，我对3D游戏建模有了更全面的理解，也深刻感受到3D游戏建模是一项跨学科的技能，融合了艺术、技术和创意。作为学习者，掌握正确的学习方法和策略，不仅能加速技能提升，还能让学习过程更高效。以下是我为3D游戏建模学习者提供的一些建议，希望能帮助你更快入门：</p>
 <p>保持耐心与持续学习：3D建模不同于解题或编程，它更像是绘画的过程。上手可能很容易，但精通却需要时间和实践。刚开始时，进展可能显得缓慢，但不要气馁。坚持练习，保持对艺术和技术的好奇心，不断学习新知识，你一定能掌握这项技能。</p>
 <p><strong>注重艺术修养与基础知识</strong>：尽管3D建模是一项技术密集型的工作，但其核心依然是艺术。掌握透视、构图、光影、色彩和材质等基本艺术概念，能够帮助你创作出更加生动和有表现力的模型。在ArtStation等平台上欣赏经典游戏美术作品，可以激发你的艺术灵感，并提高你对美学的感知与理解。手绘是提升观察力的有效途径，它帮助你更好地理解空间感、形态及结构。比如，下图展示的是我在学习期间进行的材质绘画练习，借此提升了我对材质的观察和表达能力。</p>
-<p><img src="gameDevelopment/PBR_workflow/images/sketch.webp" alt=""></p>
+<p><img src="gameDevelopment/PBR_workflow/./images/sketch.webp" alt="" /></p>
 <p><strong>熟悉软件工具与建模概念</strong>：在学习3D建模的过程中，我们需要学习下面三类知识：1)建模基本概念，如网格、拓扑、UV和法线等，这类知识可以通过网络查询进行学习，在实践中进行理解；2)建模相关软件的使用，在实践中根据需要不断学习每个功能。下图是一些常见软件图标，供参考。3)项目流程的学习，在实践中，逐步搭建和改进自己的工作流和工具。使用不同的工具解决不同的问题。</p>
 <p>做好笔记与总结：学习3D建模的过程充满了技术细节和艺术灵感，因此记笔记和定期总结非常有助于提高效率。记录下在学习过程中遇到的问题及其解决方法，并定期进行复习和总结，这样能帮助你更好地消化和吸收新知识。</p>
-<p><img src="gameDevelopment/PBR_workflow/images/cgSoftware.webp" alt=""></p>
+<p><img src="gameDevelopment/PBR_workflow/./images/cgSoftware.webp" alt="" /></p>
 <h2 id="结语"><a class="header" href="#结语">结语</a></h2>
 <p>3D建模是一项结合技术与艺术的技能，从构思到呈现的每个步骤都充满挑战与创意。希望这篇文章能为你的学习旅程提供有用的指导。无论你是初学者还是有经验的创作者，保持好奇心、持续实践，并总结经验，都会帮助你不断进步。每一次挑战都带来新的成长，期待你在3D建模的世界中，创造出属于自己的精彩作品。</p>
 
@@ -920,11 +934,6 @@ MyActor-&gt;OnScoreChanged.RemoveDynamic(this, &amp;UMyComponent::HandleScore);
 
         </div>
 
-        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
-        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
-        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
-        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
-        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
 
 
 
@@ -933,24 +942,21 @@ MyActor-&gt;OnScoreChanged.RemoveDynamic(this, &amp;UMyComponent::HandleScore);
         </script>
 
 
-        <script src="elasticlunr-ef4e11c1.min.js"></script>
-        <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-c2a407aa.js"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard-1626706a.min.js"></script>
-        <script src="highlight-abc7f01d.js"></script>
-        <script src="book-a0b12cfe.js"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
 
         <script>
         window.addEventListener('load', function() {
-            MathJax.Hub.Register.StartupHook('End', function() {
-                window.setTimeout(window.print, 100);
-            });
+            window.setTimeout(window.print, 100);
         });
         </script>
-
 
     </div>
     </body>
