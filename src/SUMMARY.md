@@ -5,19 +5,11 @@
 [前言](README.md)
 
 # 数学物理基础
-- [物理引擎中符号和单位](./gamePhysics/physics_math.md)
-
-# 刚体动力学
-
+- [物理引擎中符号和单位](./gamePhysics/physicsMath/physics_math.md)
+- [数学工具](./gamePhysics/MathTools/math_tools.md)
 
 # 碰撞检测
-- [碰撞检测](./collision_detection.md)
-
-# 约束求解
-- [动力学与约束求解](./dynamics_constraints.md)
-- [高级物理模拟](./advanced_simulation.md)
-- [物理可视化与调试](./physics_visualization.md)
-# 高级专题
+- [碰撞冲量和相对速度定义](./collision/collisionRelativeVelocity.md)
 
 
 # 游戏开发

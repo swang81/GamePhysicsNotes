@@ -5,3 +5,4 @@ language = "zh"
 
 [preprocessor.katex]
 after = ["links"]
+renderers = ["html"]
