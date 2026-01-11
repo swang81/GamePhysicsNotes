@@ -12,21 +12,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="../../favicon.svg">
-        <link rel="shortcut icon" href="../../favicon.png">
-        <link rel="stylesheet" href="../../css/variables.css">
-        <link rel="stylesheet" href="../../css/general.css">
-        <link rel="stylesheet" href="../../css/chrome.css">
-        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
-        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
-        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -36,12 +35,24 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-5d2e652b.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc.js"></script>
+        <script src="../../toc-9b96248e.js"></script>
     </head>
     <body>
-    <div id="body-container">
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
@@ -70,56 +81,59 @@
             html.classList.add("js");
         </script>
 
-        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
             let sidebar = null;
-            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
+                sidebar_toggle.checked = false;
             }
-            sidebar_toggle.checked = sidebar === 'visible';
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
         </script>
 
-        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
                 <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
             </noscript>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <div id="page-wrapper" class="page-wrapper">
+        <div id="mdbook-page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                            <i class="fa fa-bars"></i>
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
                         </label>
-                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                            <i class="fa fa-paint-brush"></i>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
                         </button>
-                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
                         </button>
                     </div>
 
@@ -127,39 +141,44 @@
 
                     <div class="right-buttons">
                         <a href="../../print.html" title="Print this book" aria-label="Print this book">
-                            <i id="print-button" class="fa fa-print"></i>
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
 
                     </div>
                 </div>
 
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
                     </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
                         </ul>
                     </div>
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script>
-                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
-                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
                     });
                 </script>
 
-                <div id="content" class="content">
+                <div id="mdbook-content" class="content">
                     <main>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <h1 id="基于pbr流程的游戏3d建模"><a class="header" href="#基于pbr流程的游戏3d建模">基于PBR流程的游戏3D建模</a></h1>
 <p>在前两期中，我们分享了3D建模的多种方法以及游戏PBR（基于物理的渲染）纹理相关知识。本期将重点介绍PBR流程的建模过程。目前网上关于PBR建模的分享视频教程种类繁多，工具使用各异，初学者常常感到眼花缭乱。本文旨在帮助大家理解高质量3D游戏资产的制作框架，从而在学习其他艺术家的制作流程时不再迷茫。</p>
 <p>本次分享分为三部分：首先介绍3D模型的特点，然后通过复刻一把废土风格的手枪来了解次世代建模的具体流程，最后分享我学习3D游戏建模的一些心得体会。</p>
-<h2 id="一pbr流程下的3d游戏模型的特点"><a class="header" href="#一pbr流程下的3d游戏模型的特点">一、PBR流程下的3D游戏模型的特点</a></h2>
+<h2 id="pbr流程下的3d游戏模型的特点"><a class="header" href="#pbr流程下的3d游戏模型的特点">PBR流程下的3D游戏模型的特点</a></h2>
 <p>PBR建模流程之所以复杂，主要是因为3D游戏模型有其独特的特点。与影视制作的预渲染不同（即先渲染完毕，再进行播放），游戏中的3D模型需要在实时渲染的条件下边渲染边播放。这意味着视觉效果必须快速生成并即时反馈给玩家，从而保证流畅的交互体验。为了实现这一点，一般来说，高质量的游戏需要确保至少60FPS（帧/秒）的渲染速度。而对于VR/MR/XR游戏，为了避免晕动症，渲染速度通常要求达到至少72FPS以上。那么，如何优化性能，提高渲染速度呢？为了满足这些性能要求，模型制作通常会考虑以下几个方面：</p>
 <p><strong>多边形数量与性能平衡</strong>: 游戏模型必须在有限的多边形数量下展现足够的视觉细节，以适应实时渲染需求，使用的优化技术包括：低多边形建模，减少计算量，保持视觉效果；用法线贴图代替更多的几何体，增强细节表现；采用LOD技术，根据视距动态切换模型的细节层次，降低远景物体的渲染负担。</p>
 <p><strong>贴图优化与纹理分辨率</strong>: 贴图是表现模型细节的核心，但需要在分辨率和内存占用之间找到平衡：使用合理大小的贴图，避免过大贴图带来的性能瓶颈；应用UV展开技巧，减少纹理浪费和接缝问题；选择合适的纹理压缩格式（如DDS、ASTC）以优化内存使用。</p>
@@ -168,7 +187,7 @@
 <p><strong>硬件平台适配</strong>：不同硬件平台的计算力不同，因此需要根据平台要求进行优化：在PC设备上使用更精细的模型和材质；针对移动设备优化多边形数量、贴图分辨率和渲染技术；VR设备需要满足双目渲染要求，因此对模型优化的要求更高。</p>
 <p><strong>模型兼容性与游戏引擎支持</strong>：游戏模型必须与游戏引擎兼容，满足引擎的各种要求：使用支持的文件格式（如FBX、OBJ、GLTF）；校准模型在引擎中的效果，确保渲染无误。</p>
 <p>总结来说，游戏模型制作不仅仅是视觉艺术的创作，更是技术与艺术的结合，需要充分考虑性能、细节和适配性。接下来，我们将基于这些特点，深入探讨3D游戏静态模型的制作流程（本次不涉及动画）。</p>
-<h2 id="二基于pbr流程的3d建模步骤"><a class="header" href="#二基于pbr流程的3d建模步骤">二、基于PBR流程的3D建模步骤</a></h2>
+<h2 id="基于pbr流程的3d建模步骤"><a class="header" href="#基于pbr流程的3d建模步骤">基于PBR流程的3D建模步骤</a></h2>
 <p>基于PBR的3D建模流程，不仅仅涉及构建模型的形状，还需要确保材质在真实光照条件下的效果。为了帮助大家更好地理解，我将通过制作一把废土风格的手枪模型，详细讲解次世代建模的步骤。以下是整个流程的详细介绍：</p>
 <p>1.概念设计与参考资料收集</p>
 <p>在建模前，第一步是获取足够的参考资料。收集大量图片（如真实物品的照片、电影截图或其他游戏中的素材）来确定模型的外观、比例、细节和材质效果。参考资料的收集和管理对于制作过程至关重要。在工业化流程中，原画师会提供三视图（正视图、侧视图、俯视图），这对于建模的准确性和比例的掌控非常重要。</p>
@@ -177,38 +196,38 @@
 <p>中模是3D建模的基础模型，决定了最终形态的轮廓和比例。此阶段的重点是确保模型的形状清晰，能为后续的细节雕刻和优化打下基础。我们需要注意多边形的数量和几何形状的合理性。在整个建模流程中，模型按多边形数量，会分为低模、中模和高模。低模用于游戏中的实时渲染，负责主要形状和轮廓。高模则用于细节雕刻，通常会包含更多的多边形。中模是介于两者之间的模型。下图展示的是我们使用3ds Max制作的一个枪的中模模型，它帮助我们确定了
 模型的基本形状和比例。</p>
 <p><strong>常用工具</strong>：Maya、3ds Max和Blender是常见的建模工具，用户可以根据个人习惯选择。中模建模时，我们通常使用多边形建模方法，保持模型的灵活性。</p>
-<p><img src="./images/middleModel.webp" alt="" /></p>
+<p><img src="./images/middleModel.webp" alt=""></p>
 <p>3.高模雕刻</p>
 <p>在这一阶段，我们将中模导入到雕刻软件中，进一步添加细节。这一过程尤为关键，因为它直接决定了最终模型的精细度。下图，是利用ZBrush雕刻废土枪的边缘，模拟焊接的效果。</p>
 <p><strong>常用工具</strong>：ZBrush是常见的雕刻软件，艺术家可以通过刷子、笔触等工具进行细节雕刻，如表面划痕、褶皱、焊接痕迹等。这些细节的雕刻帮助模型呈现更加真实的效果，特别是在细节丰富的硬表面（如枪械、机械等）上非常重要。</p>
-<p><img src="./images/zbrush.webp" alt="" /></p>
+<p><img src="./images/zbrush.webp" alt=""></p>
 <p>4.低模制作与UV展开</p>
 <p>低模的制作包括对中模进行删减、优化并将其转换成低多边形模型。低模的多边形数量要足够低，以保证游戏的运行效率，但同时又要能够保留足够的形状和细节。合理的多边形分布和拓扑结构非常重要。在这个阶段，我们还需要展开UV，以便后续贴图的制作。在UV展开过程中，模型的表面被“拆解”成平面，形成一个UV图集。需要避免“接缝”问题，确保纹理能够无缝地贴合到模型表面。</p>
 <p><strong>常用工具</strong>：常见的建模工具可以进行UV展开。复杂的模型可以使用专业工具（如RizomUV）来进行UV展开，这样能够大大提高效率和精度。下图是RizomUV工具的界面，可以看到很多复杂的UV可以被自动摆好。</p>
-<p><img src="./images/uv.webp" alt="" /></p>
+<p><img src="./images/uv.webp" alt=""></p>
 <p>5.烘焙法线贴图和AO</p>
 <p>这一步的关键是将高模的细节转移到低模上，以提升低多边形模型的细节表现。通过烘焙生成法线贴图和AO贴图，能有效增强低模的细节感与立体感。法线贴图：它能够模拟模型表面细节（如划痕、凹陷等表面细节），无需增加多边形数目，从而在保持低多边形的同时展现丰富的细节。AO贴图：它用于模拟物体间的阴影效果，增强模型的立体感和真实感，特别是在光线较弱的区域。在这一步，我们需要确保烘焙效果的准确性，避免出现错位或不自然的阴影。如果法线贴图或AO贴图存在瑕疵，通常需要借助绘图软件进行手动修正，以确保最终效果的精确和自然。</p>
 <p><strong>常见工具</strong>：Marmoset Toolbag和Substance Painter都可以用于烘焙法线和AO贴图。修改贴图可以使用Photoshop。</p>
-<p><img src="./images/bake.webp" alt="" /></p>
+<p><img src="./images/bake.webp" alt=""></p>
 <p>6.制作材质贴图</p>
 <p>材质的表现是PBR流程中至关重要的一环，决定了模型在不同光照条件下的外观。此步骤我们将低模模型和法线贴图、OA贴图，导入Substance Painter（简称SP），并通过该工具制作材质贴图。在SP中，我们通常会制作几种基础的贴图，如BaseColor、Emissive、Roughness、Metallic等，也会在Normal贴图上添加一些表面细节。</p>
 <p><strong>常见工具</strong>：Marmoset Toolbag和Substance Painter是常用的烘焙法线和AO贴图的工具，能够高效地将高模细节转移到低模上。对于贴图的修改与精细调整，可以使用Photoshop等图像处理软件，进一步优化贴图效果。</p>
-<p><img src="./images/sp.webp" alt="" /></p>
+<p><img src="./images/sp.webp" alt=""></p>
 <p>7.导入游戏引擎测试</p>
 <p>完成贴图制作后，将低模和材质贴图导入到游戏引擎中（如Unity或Unreal Engine），测试模型在实时渲染中的效果。这一步骤能够帮助我们检查光照效果、材质表现以及模型是否适应引擎的要求。检查帧数表现(FPS)，确保模型不会导致过高的渲染负担，特别是在多边形数量和纹理大小方面。</p>
 <p>8.作品展示</p>
 <p>最后，为了最大程度地展示模型的细节和质感，3D艺术家通常会使用专门的渲染器（如Marmoset Toolbag、V-Ray等）进行渲染。渲染器可以精准模拟光照、阴影、材质反射等效果，帮助艺术家展示模型的最终效果。如下图，在画面中，可以清晰区别不同的材质表现。</p>
-<p><img src="./images/show1.webp" alt="" />
-<img src="./images/show2.webp" alt="" /></p>
+<p><img src="./images/show1.webp" alt="">
+<img src="./images/show2.webp" alt=""></p>
 <p>通过这些步骤，我们能够完成一个完整的基于PBR流程的3D模型制作。希望通过这一详细的过程，大家能够更加清晰地理解每个阶段的工作重点，以及如何高效地进行3D建模创作。</p>
-<h2 id="三一些心得体会"><a class="header" href="#三一些心得体会">三、一些心得体会</a></h2>
+<h2 id="一些心得体会"><a class="header" href="#一些心得体会">一些心得体会</a></h2>
 <p>经过几个月的系统学习，我对3D游戏建模有了更全面的理解，也深刻感受到3D游戏建模是一项跨学科的技能，融合了艺术、技术和创意。作为学习者，掌握正确的学习方法和策略，不仅能加速技能提升，还能让学习过程更高效。以下是我为3D游戏建模学习者提供的一些建议，希望能帮助你更快入门：</p>
 <p>保持耐心与持续学习：3D建模不同于解题或编程，它更像是绘画的过程。上手可能很容易，但精通却需要时间和实践。刚开始时，进展可能显得缓慢，但不要气馁。坚持练习，保持对艺术和技术的好奇心，不断学习新知识，你一定能掌握这项技能。</p>
 <p><strong>注重艺术修养与基础知识</strong>：尽管3D建模是一项技术密集型的工作，但其核心依然是艺术。掌握透视、构图、光影、色彩和材质等基本艺术概念，能够帮助你创作出更加生动和有表现力的模型。在ArtStation等平台上欣赏经典游戏美术作品，可以激发你的艺术灵感，并提高你对美学的感知与理解。手绘是提升观察力的有效途径，它帮助你更好地理解空间感、形态及结构。比如，下图展示的是我在学习期间进行的材质绘画练习，借此提升了我对材质的观察和表达能力。</p>
-<p><img src="./images/sketch.webp" alt="" /></p>
+<p><img src="./images/sketch.webp" alt=""></p>
 <p><strong>熟悉软件工具与建模概念</strong>：在学习3D建模的过程中，我们需要学习下面三类知识：1)建模基本概念，如网格、拓扑、UV和法线等，这类知识可以通过网络查询进行学习，在实践中进行理解；2)建模相关软件的使用，在实践中根据需要不断学习每个功能。下图是一些常见软件图标，供参考。3)项目流程的学习，在实践中，逐步搭建和改进自己的工作流和工具。使用不同的工具解决不同的问题。</p>
 <p>做好笔记与总结：学习3D建模的过程充满了技术细节和艺术灵感，因此记笔记和定期总结非常有助于提高效率。记录下在学习过程中遇到的问题及其解决方法，并定期进行复习和总结，这样能帮助你更好地消化和吸收新知识。</p>
-<p><img src="./images/cgSoftware.webp" alt="" /></p>
+<p><img src="./images/cgSoftware.webp" alt=""></p>
 <h2 id="结语"><a class="header" href="#结语">结语</a></h2>
 <p>3D建模是一项结合技术与艺术的技能，从构思到呈现的每个步骤都充满挑战与创意。希望这篇文章能为你的学习旅程提供有用的指导。无论你是初学者还是有经验的创作者，保持好奇心、持续实践，并总结经验，都会帮助你不断进步。每一次挑战都带来新的成长，期待你在3D建模的世界中，创造出属于自己的精彩作品。</p>
 
@@ -217,7 +236,7 @@
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                             <a rel="prev" href="../../gameDevelopment/UEC++/UEC++.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <i class="fa fa-angle-left"></i>
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
 
@@ -228,14 +247,35 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                     <a rel="prev" href="../../gameDevelopment/UEC++/UEC++.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa fa-angle-left"></i>
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
             </nav>
 
         </div>
 
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
         <script>
@@ -243,15 +283,16 @@
         </script>
 
 
-        <script src="../../elasticlunr.min.js"></script>
-        <script src="../../mark.min.js"></script>
-        <script src="../../searcher.js"></script>
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
 
-        <script src="../../clipboard.min.js"></script>
-        <script src="../../highlight.js"></script>
-        <script src="../../book.js"></script>
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
 
         <!-- Custom JS scripts -->
+
 
 
     </div>
